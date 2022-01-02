@@ -6,27 +6,17 @@ static char *days[] = { "sat", "sun", "mon", "tue", "wed", "thu", "fri" };
 
 int main(int argc, char **argv)
 {
-	if (argc != 4) {
-		fprintf(stderr, "usage: %s year month day\n", *argv);
-		return 22;
+	if (argc != 2) {
+		fprintf(stderr, "usage: %s YYYY-MM-DD\n", *argv);
+		return 7;
 	}
 	int y, m, d, n;
-	n = sscanf(*(argv + 1), "%d", &y);
-	if (n != 1) {
-		fprintf(stderr, "dow: invalid year\n");
+	n = sscanf(*(argv + 1), "%d-%d-%d", &y, &m, &d);
+	if (n != 3) {
+		fprintf(stderr, "dow: invalid date\n");
 		return 22;
 	}
-	n = sscanf(*(argv + 2), "%d", &m);
-	if (n != 1) {
-		fprintf(stderr, "dow: invalid month\n");
-		return 22;
-	}
-	n = sscanf(*(argv + 3), "%d", &d);
-	if (n != 1) {
-		fprintf(stderr, "dow: invalid day\n");
-		return 22;
-	}
-	printf("%s\n", days[dow(y, n, d)]);
+	printf("%s\n", days[dow(y, m, d)]);
 	return 0;
 }
 
